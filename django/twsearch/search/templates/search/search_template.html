@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8" />
+<title>django -twitter search</title>
+</head>
+<body>
+  <header>
+    <h1>{{ query }}の検索結果</h1>
+  </header>
+
+  <div id="searchbox">
+   <form action="/django/twsearch/" method="GET">
+     <input type="text" name="query" id="query" value="{{ query }}" />
+     <input type="hidden" name="page" id="page" value="{{ page }}" />
+   <input type="submit" value="Search" />
+   </form>
+  </div>
+  <div id="searchresult">
+    <ul>
+    {% for tweet in tweets %}
+    <li>{{tweet.text}} </li>
+    {% endfor %}
+    </ul>
+  </div>
+
+{% if next > 1 %}
+<a href="{%url home%}?query={{ query|urlencode }}&page={{ next|urlencode }}">>next</a>
+{%endif%}
+</body>
+</html>
