@@ -1,7 +1,5 @@
-<h2>Listing Buzzwords</h2>
-<br>
 <?php if ($buzzwords): ?>
-<table class="zebra-striped">
+<table class="table table-striped table-bordered">
 	<thead>
 		<tr>
 			<th>Word</th>
@@ -35,6 +33,4 @@
 <?php else: ?>
 <p>No Buzzwords.</p>
 
-<?php endif; ?><p>
-
-</p>
+<?php endif; ?>
