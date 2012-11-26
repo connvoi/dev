@@ -6,12 +6,10 @@ db.setProfilingLevel(2);
 //in this case, a query which takes over 1000ms will logged. 
 db.setProfilingLevel(1, 1000);
 
-
 /**
  * disable profiling
  */
 db.setProfilingLevel(0);
-
 
 /**
  * Change LogLevel
@@ -19,7 +17,6 @@ db.setProfilingLevel(0);
  */
 use admin
 db.adminCommand({setParameter:1, LogLevel:5})
-
 
 /**
  * mongostat
