@@ -10,7 +10,7 @@ set showcmd
 set showmatch
 set laststatus=2
 set backspace=indent,eol,start
-set shiftwidth=2
+set shiftwidth=4
 set softtabstop=0
 set backup
 "set encoding=euc-jp
@@ -27,10 +27,103 @@ set autoindent
 set backupdir=/Users/kyagi/backup
 set backupext=.bak
 set undolevels=100
+
+"set dictionary
+autocmd BufRead *.php\|*.ctp\|*.tpl :set dictionary=~/.vim/dictionaries/php.dict filetype=php
+
+"neobundle Settings
+set nocompatible               " Be iMproved
+if has('vim_starting')
+  set runtimepath+=~/.vim/bundle/neobundle.vim/
+endif
+call neobundle#rc(expand('~/.vim/bundle/'))
+" Let NeoBundle manage NeoBundle
+NeoBundleFetch 'Shougo/neobundle.vim'
+" Recommended to install
+" After install, turn shell ~/.vim/bundle/vimproc, (n,g)make -f your_machines_makefile
+NeoBundle 'Shougo/vimproc'
+"My Bundles here:
+"
+" Note: You don't set neobundle setting in .gvimrc!
+" Original repos on github
+NeoBundle 'tpope/vim-fugitive'
+NeoBundle 'Lokaltog/vim-easymotion'
+NeoBundle 'rstacruz/sparkup', {'rtp': 'vim/'}
+NeoBundle 'Shougo/neocomplcache'
+NeoBundle 'Shougo/unite.vim'
+NeoBundle 'ujihisa/unite-colorscheme'
+NeoBundle 'thinca/vim-ref'
+let g:ref_phpmanual_path = $HOME . '/.vim/refs/php-chunked-xhtml'
+"quickrun config
+NeoBundle 'thinca/vim-quickrun'
+let g:quickrun_config = {}
+let g:quickrun_config.markdown = { 'outputter' : 'null', 'command' : 'open', 'cmdopt' : '-a', 'args' : 'Marked', 'exec' : '%c %o %a %s', }
+" vim-scripts repos
+NeoBundle 'L9'
+NeoBundle 'FuzzyFinder'
+NeoBundle 'rails.vim'
+" Non github repos
+NeoBundle 'git://git.wincent.com/command-t.git'
+" gist repos
+" NeoBundle 'gist:Shougo/656148', { \ 'name': 'everything.vim', \ 'script_type': 'plugin'}
+" Non git repos
+NeoBundle 'http://svn.macports.org/repository/macports/contrib/mpvim/'
+"colorschemes
+NeoBundle 'altercation/vim-colors-solarized'
+NeoBundle 'croaker/mustang-vim'
+NeoBundle 'jeffreyiacono/vim-colors-wombat'
+NeoBundle 'nanotech/jellybeans.vim'
+NeoBundle 'vim-scripts/Lucius'
+NeoBundle 'vim-scripts/Zenburn'
+NeoBundle 'mrkn/mrkn256.vim'
+NeoBundle 'jpo/vim-railscasts-theme'
+NeoBundle 'therubymug/vim-pyte'
+NeoBundle 'connvoi/vim-color-connvoi'
+"syntastic
+NeoBundle 'Markdown'
+NeoBundle 'plasticboy/vim-markdown'
+NeoBundle 'scrooloose/syntastic'
+let g:syntastic_check_on_open = 1
+let g:syntastic_enable_signs = 1
+let g:syntastic_echo_current_error = 1
+let g:syntastic_auto_loc_list = 2
+let g:syntastic_enable_highlighting = 1
+" php cmd option
+let g:syntastic_php_php_args = '-l'
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+ filetype plugin indent on     " Required!
+
+
+ "lightline
+ NeoBundle 'itchyny/lightline.vim'
+ let g:lightline={ 'colorscheme' : 'wombat',}
+
+ "
+ " Brief help
+ " :NeoBundleList          - list configured bundles
+ " :NeoBundleInstall(!)    - install(update) bundles
+ " :NeoBundleClean(!)      - confirm(or auto-approve) removal of unused bundles
+
+ " Installation check.
+ NeoBundleCheck
+
+"backupdir settings
+"when open files 
 let &directory = &backupdir
+"neocomplcache settings
 let g:neocomplcache_enable_at_startup = 1
-filetype plugin on
-filetype indent on
+let g:neocomplcache_enable_camel_case_completion = 1
+let g:neocomplcache_enable_underbar_completion = 1
+let g:neocomplcache_smart_case = 1
+let g:neocomplcache_min_syntax_length = 3
+let g:neocomplcache_manual_completion_start_length = 0
+let g:neocomplcache_caching_percent_in_statusline = 1
+let g:neocomplcache_enable_skip_completion = 1
+let g:neocomplcache_skip_input_time = '0.5'
+
 function AC_Brackets()
 inoremap { {}<LEFT>
 inoremap [ []<LEFT>
@@ -49,16 +142,17 @@ autocmd FileType python       call AC_Brackets()
 autocmd FileType html       call AC_Brackets()
 endif
 
+"keyconfig
 imap jj <ESC>
 nmap j gj
 nmap k gk
 vmap j gj
 vmap k gk
 
-set bg=dark
-set term=xterm-color
-set ttytype=xterm
+
 syntax on
+colorscheme connvoi
+"
 "colorscheme pyte
 "hilight test
 ":so /home/y/share/vim/vim70/syntax/hitest.vim
@@ -67,63 +161,3 @@ syntax on
 "change comment color
 "hi Comment ctermfg=black or etc
 "if 16 colors, %s/darkblue/blue/g
-
-hi clear
-
-"for php
-hi Function          ctermfg=darkgreen
-hi Repeat            ctermfg=darkgreen
-hi String            ctermfg=darkmagenta
-hi Number            ctermfg=darkmagenta
-hi Boolean            ctermfg=darkmagenta
-
-hi Normal          guifg=#0000af guibg=#e4e4e4 ctermfg=gray ctermbg=black
-hi Cursor          guifg=#ffffff guibg=#0000af ctermfg=gray
-hi Comment         guifg=#ff8700 guibg=#e4e4e4 ctermfg=darkcyan
-hi Constant        guifg=#d70000 guibg=bg term=underline ctermfg=blue
-hi Special         guifg=#d75f00 guibg=bg ctermfg=blue
-hi Identifier      guifg=#0000af guibg=bg term=underline ctermfg=gray
-hi Statement       guifg=#008700 guibg=bg gui=NONE ctermfg=blue
-hi PreProc         guifg=#00af00 guibg=bg term=underline  ctermfg=darkgreen gui=bold
-hi Type            guifg=#00af00 guibg=bg term=underline ctermfg=darkgreen
-hi Underlined      guifg=#80a0ff guibg=bg term=underline cterm=underline ctermfg=darkcyan gui=underline
-hi Ignore          guifg=bg guibg=fg ctermfg=blue
-hi Error           guifg=#ffffff guibg=#ff0000 term=bold ctermbg=darkmagenta ctermfg=black
-
-hi Todo            guifg=#0000ff guibg=#ffff00 term=bold ctermfg=black ctermbg=darkcyan
-hi Pmenu           guibg=#ff00ff guifg=fg ctermbg=black ctermfg=gray
-hi PmenuSel        guibg=#a9a9a9 guifg=fg ctermbg=darkcyan ctermfg=black
-hi PmenuSbar       guibg=#bebebe guifg=fg ctermbg=darkred
-hi PmenuThumb      guifg=fg guibg=bg gui=reverse cterm=reverse ctermfg=gray
-hi TabLine         guibg=#a9a9a9 guifg=fg gui=underline term=underline cterm=underline ctermfg=gray ctermbg=darkred
-hi TabLineSel      guifg=fg guibg=bg gui=bold term=bold
-hi TabLineFill     guifg=fg guibg=bg gui=reverse term=reverse cterm=reverse
-hi MatchParen      guifg=#cecb00 guibg=#ffffaf term=reverse ctermfg=brown ctermbg=darkcyan
-
-hi SpecialKey      guifg=#00ffff guibg=bg term=bold ctermfg=gray
-hi NonText         guifg=#0000ff guibg=bg gui=bold term=bold ctermfg=blue
-hi Directory       guifg=#00ffff guibg=bg term=bold ctermfg=brown
-hi ErrorMsg        guifg=#ffffff guibg=#ff0000  ctermbg=darkmagenta ctermfg=black
-hi IncSearch       guifg=#708090 guibg=#f0e68c gui=reverse term=reverse cterm=reverse ctermfg=brown ctermbg=black
-hi Search          guifg=#000087 guibg=#87ffd7 term=reverse ctermfg=black ctermbg=brown
-hi MoreMsg         term=bold ctermfg=darkgreen gui=bold guifg=#00875f guibg=bg
-hi ModeMsg         term=bold ctermfg=darkmagenta gui=bold guifg=#d7af00 guibg=bg
-hi LineNr          guifg=#d7d787 guibg=bg term=underline cterm=underline ctermfg=darkcyan ctermbg=black
-hi Question        guifg=#00ffff guibg=bg gui=bold term=bold ctermfg=blue
-hi VertSplit       guifg=#000087 guibg=#c6c6c6 gui=reverse ctermfg=black ctermbg=darkred term=reverse cterm=reverse
-hi Title           guifg=#d700af guibg=bg gui=bold ctermfg=gray
-hi Visual          guifg=#ffffaf guibg=#005f00 gui=reverse term=reverse cterm=reverse ctermfg=darkcyan ctermbg=black
-hi VisualNOS       guifg=fg guibg=bg gui=bold,underline term=bold,underline ctermfg=darkcyan ctermbg=black
-hi StatusLine          guifg=#ffffaf guibg=#005f00 gui=reverse term=reverse cterm=reverse ctermfg=darkcyan ctermbg=black
-hi StatusLineNC       guifg=fg guibg=bg gui=bold,underline term=bold,underline ctermfg=darkcyan ctermbg=black
-hi WarningMsg      guifg=#ff0000 guibg=bg term=bold ctermfg=darkmagenta
-hi WildMenu        guifg=#000000 guibg=#ffff00 guifg=fg term=bold ctermfg=black ctermbg=darkcyan
-hi Folded          guifg=#00ffff guibg=#a8a8a8 ctermbg=darkcyan ctermfg=black
-hi FoldColumn      guifg=#00ffff guibg=#bcbcbc ctermbg=darkcyan ctermfg=black
-hi DiffAdd         guibg=#000087 guifg=#e4e4e4 term=bold  ctermbg=brown ctermfg=black
-hi DiffChange      guibg=#870087 guifg=#87afff term=bold ctermbg=darkred
-hi DiffDelete      guifg=#0000ff guibg=#008787 gui=bold term=bold ctermfg=black ctermbg=brown
-hi DiffText        guibg=#ff0000 guifg=fg gui=bold term=reverse  ctermbg=darkmagenta ctermfg=black
-hi SignColumn      guifg=#00ffff guibg=#bcbcbc term=bold ctermfg=black ctermbg=darkcyan
-hi lCursor         guifg=#d7ffd7 guibg=#0000af
-finish
