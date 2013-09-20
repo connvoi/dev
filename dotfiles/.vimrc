@@ -152,12 +152,4 @@ vmap k gk
 
 syntax on
 colorscheme connvoi
-"
-"colorscheme pyte
-"hilight test
-":so /home/y/share/vim/vim70/syntax/hitest.vim
-"color test
-":so /home/y/share/vim/vim70/syntax/colortest.vim
-"change comment color
-"hi Comment ctermfg=black or etc
-"if 16 colors, %s/darkblue/blue/g
+
