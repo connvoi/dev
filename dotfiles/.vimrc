@@ -24,7 +24,7 @@ set nolist
 set tabstop=2
 set expandtab
 set autoindent
-set backupdir=/Users/kyagi/backup
+set backupdir=/Users/kyagi/backup/
 set backupext=.bak
 set undolevels=100
 
@@ -36,79 +36,98 @@ set nocompatible               " Be iMproved
 if has('vim_starting')
   set runtimepath+=~/.vim/bundle/neobundle.vim/
 endif
-call neobundle#rc(expand('~/.vim/bundle/'))
-" Let NeoBundle manage NeoBundle
+call neobundle#begin(expand('~/.vim/bundle/'))
 NeoBundleFetch 'Shougo/neobundle.vim'
-" Recommended to install
-" After install, turn shell ~/.vim/bundle/vimproc, (n,g)make -f your_machines_makefile
-NeoBundle 'Shougo/vimproc'
-"My Bundles here:
-"
-" Note: You don't set neobundle setting in .gvimrc!
-" Original repos on github
-NeoBundle 'tpope/vim-fugitive'
-NeoBundle 'Lokaltog/vim-easymotion'
-NeoBundle 'rstacruz/sparkup', {'rtp': 'vim/'}
-NeoBundle 'Shougo/neocomplcache'
-NeoBundle 'Shougo/unite.vim'
-NeoBundle 'ujihisa/unite-colorscheme'
-NeoBundle 'thinca/vim-ref'
-let g:ref_phpmanual_path = $HOME . '/.vim/refs/php-chunked-xhtml'
-"quickrun config
-NeoBundle 'thinca/vim-quickrun'
-let g:quickrun_config = {}
-let g:quickrun_config.markdown = { 'outputter' : 'null', 'command' : 'open', 'cmdopt' : '-a', 'args' : 'Marked', 'exec' : '%c %o %a %s', }
-" vim-scripts repos
-NeoBundle 'L9'
-NeoBundle 'FuzzyFinder'
-NeoBundle 'rails.vim'
-" Non github repos
-NeoBundle 'git://git.wincent.com/command-t.git'
-" gist repos
-" NeoBundle 'gist:Shougo/656148', { \ 'name': 'everything.vim', \ 'script_type': 'plugin'}
-" Non git repos
-NeoBundle 'http://svn.macports.org/repository/macports/contrib/mpvim/'
-"colorschemes
-NeoBundle 'altercation/vim-colors-solarized'
-NeoBundle 'croaker/mustang-vim'
-NeoBundle 'jeffreyiacono/vim-colors-wombat'
-NeoBundle 'nanotech/jellybeans.vim'
-NeoBundle 'vim-scripts/Lucius'
-NeoBundle 'vim-scripts/Zenburn'
-NeoBundle 'mrkn/mrkn256.vim'
-NeoBundle 'jpo/vim-railscasts-theme'
-NeoBundle 'therubymug/vim-pyte'
-NeoBundle 'connvoi/vim-color-connvoi'
-"syntastic
-NeoBundle 'Markdown'
-NeoBundle 'plasticboy/vim-markdown'
-NeoBundle 'scrooloose/syntastic'
-let g:syntastic_check_on_open = 1
-let g:syntastic_enable_signs = 1
-let g:syntastic_echo_current_error = 1
-let g:syntastic_auto_loc_list = 2
-let g:syntastic_enable_highlighting = 1
-" php cmd option
-let g:syntastic_php_php_args = '-l'
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
+call neobundle#end()
+
+  " Let NeoBundle manage NeoBundle
+  NeoBundleFetch 'git://github.com/Shougo/neobundle.vim'
+  " Recommended to install
+  " After install, turn shell ~/.vim/bundle/vimproc, (n,g)make -f your_machines_makefile
+  NeoBundle 'git://github.com/Shougo/vimproc'
+	NeoBundle 'Shougo/vimproc.vim', {
+	      \   'build' : {
+	      \     'windows' : 'tools\\update-dll-mingw',
+	      \     'cygwin' : 'make -f make_cygwin.mak',
+	      \     'mac' : 'make -f make_mac.mak',
+	      \     'linux' : 'make',
+	      \     'unix' : 'gmake',
+	      \   }
+	      \ }
+
+
+  "My Bundles here:
+  "
+  " Note: You don't set neobundle setting in .gvimrc!
+  " Original repos on github
+  NeoBundle 'git://github.com/tpope/vim-fugitive'
+  NeoBundle 'git://github.com/Lokaltog/vim-easymotion'
+  NeoBundle 'git://github.com/rstacruz/sparkup', {'rtp': 'vim/'}
+  NeoBundle 'git://github.com/Shougo/neocomplcache'
+  NeoBundle 'git://github.com/Shougo/unite.vim'
+  NeoBundle 'git://github.com/ujihisa/unite-colorscheme'
+  NeoBundle 'git://github.com/thinca/vim-ref'
+  let g:ref_phpmanual_path = $HOME . '/.vim/refs/php-chunked-xhtml'
+  "quickrun config
+  NeoBundle 'git://github.com/thinca/vim-quickrun'
+  let g:quickrun_config = {}
+  let g:quickrun_config.markdown = { 'outputter' : 'null', 'command' : 'open', 'cmdopt' : '-a', 'args' : 'Marked', 'exec' : '%c %o %a %s', }
+  " vim-scripts repos
+  NeoBundle 'git://github.com/vim-scripts/L9'
+  NeoBundle 'git://github.com/vim-scripts/FuzzyFinder'
+  NeoBundle 'git://github.com/scrooloose/nerdtree'
+  " Non github repos
+  NeoBundle 'git://git.wincent.com/command-t.git'
+  " gist repos
+  " NeoBundle 'gist:Shougo/656148', { \ 'name': 'everything.vim', \ 'script_type': 'plugin'}
+  " Non git repos
+  NeoBundle 'http://svn.macports.org/repository/macports/contrib/mpvim/'
+  "colorschemes
+  NeoBundle 'git://github.com/altercation/vim-colors-solarized'
+  NeoBundle 'git://github.com/croaker/mustang-vim'
+  NeoBundle 'git://github.com/jeffreyiacono/vim-colors-wombat'
+  NeoBundle 'git://github.com/nanotech/jellybeans.vim'
+  NeoBundle 'git://github.com/vim-scripts/Lucius'
+  NeoBundle 'git://github.com/vim-scripts/Zenburn'
+  NeoBundle 'git://github.com/mrkn/mrkn256.vim'
+  NeoBundle 'git://github.com/jpo/vim-railscasts-theme'
+  NeoBundle 'git://github.com/therubymug/vim-pyte'
+  NeoBundle 'git://github.com/connvoi/vim-colors-connvoi'
+  "syntastic
+  "NeoBundle 'Markdown'
+  NeoBundle 'git://github.com/plasticboy/vim-markdown'
+  let g:vim_markdown_folding_disabled=1
+  NeoBundle 'git://github.com/scrooloose/syntastic'
+  let g:syntastic_check_on_open = 1
+  let g:syntastic_enable_signs = 1
+  let g:syntastic_echo_current_error = 1
+  let g:syntastic_auto_loc_list = 2
+  let g:syntastic_enable_highlighting = 1
+  " php cmd option
+  let g:syntastic_php_php_args = '-l'
+  set statusline+=%#warningmsg#
+  set statusline+=%{SyntasticStatuslineFlag()}
+  set statusline+=%*
 
  filetype plugin indent on     " Required!
 
 
  "lightline
- NeoBundle 'itchyny/lightline.vim'
- let g:lightline={ 'colorscheme' : 'wombat',}
+NeoBundle 'git://github.com/itchyny/lightline.vim'
+let g:lightline={ 'colorscheme' : 'wombat',}
 
- "
- " Brief help
- " :NeoBundleList          - list configured bundles
- " :NeoBundleInstall(!)    - install(update) bundles
- " :NeoBundleClean(!)      - confirm(or auto-approve) removal of unused bundles
+if !has('gui_running')
+  set t_Co=256
+endif
+
+"
+" Brief help
+" :NeoBundleList          - list configured bundles
+" :NeoBundleInstall(!)    - install(update) bundles
+" :NeoBundleClean(!)      - confirm(or auto-approve) removal of unused bundles
 
  " Installation check.
- NeoBundleCheck
+  NeoBundleCheck
 
 "backupdir settings
 "when open files 
@@ -149,7 +168,5 @@ nmap k gk
 vmap j gj
 vmap k gk
 
-
 syntax on
 colorscheme connvoi
-
