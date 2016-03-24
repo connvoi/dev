@@ -1,186 +1,106 @@
-# 少し凝った zshrc
-# License : MIT
-# http://mollifier.mit-license.org/
+# Path to your oh-my-zsh installation.
+export ZSH=/Users/kyagi/.oh-my-zsh
+TERM=xterm-256color
 
-########################################
-# 環境変数
-export LANG=ja_JP.UTF-8
-export PATH="$HOME/.rbenv/bin:$PATH"
-export LS_COLORS="no=00:fi=00:di=36:ln=34:ex=32"
-export LSCOLORS="gxfxcxdxcxegedabagacad"
-export TERM=xterm-256color
+# Set name of the theme to load.
+# Look in ~/.oh-my-zsh/themes/
+# Optionally, if you set this to "random", it'll load a random theme each
+# time that oh-my-zsh is loaded.
+ZSH_THEME="wedisagree"
 
+# Uncomment the following line to use case-sensitive completion.
+# CASE_SENSITIVE="true"
 
-# 色を使用出来るようにする
-autoload -Uz colors
-colors
+# Uncomment the following line to use hyphen-insensitive completion. Case
+# sensitive completion must be off. _ and - will be interchangeable.
+# HYPHEN_INSENSITIVE="true"
 
-# vim 風キーバインドにする
-bindkey -v
+# Uncomment the following line to disable bi-weekly auto-update checks.
+# DISABLE_AUTO_UPDATE="true"
 
-# ヒストリの設定
-HISTFILE=~/.zsh_history
-HISTSIZE=1000000
-SAVEHIST=1000000
+# Uncomment the following line to change how often to auto-update (in days).
+# export UPDATE_ZSH_DAYS=13
 
-# プロンプト
-# 1行表示
-# PROMPT="%~ %# "
-# 2行表示
-#PROMPT="%{${fg[green]}%}[%n@%m]%{${reset_color}%} %~
-#%# "
+# Uncomment the following line to disable colors in ls.
+# DISABLE_LS_COLORS="true"
 
+# Uncomment the following line to disable auto-setting terminal title.
+# DISABLE_AUTO_TITLE="true"
 
-# 単語の区切り文字を指定する
-autoload -Uz select-word-style
-select-word-style default
-# ここで指定した文字は単語区切りとみなされる
-# / も区切りと扱うので、^W でディレクトリ１つ分を削除できる
-zstyle ':zle:*' word-chars " /=;@:{},|"
-zstyle ':zle:*' word-style unspecified
+# Uncomment the following line to enable command auto-correction.
+# ENABLE_CORRECTION="true"
 
-########################################
-# 補完
-# 補完機能を有効にする
-autoload -Uz compinit
-compinit
+# Uncomment the following line to display red dots whilst waiting for completion.
+# COMPLETION_WAITING_DOTS="true"
 
-# 補完で小文字でも大文字にマッチさせる
-zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
+# Uncomment the following line if you want to disable marking untracked files
+# under VCS as dirty. This makes repository status check for large repositories
+# much, much faster.
+# DISABLE_UNTRACKED_FILES_DIRTY="true"
 
-# ../ の後は今いるディレクトリを補完しない
-zstyle ':completion:*' ignore-parents parent pwd ..
+# Uncomment the following line if you want to change the command execution time
+# stamp shown in the history command output.
+# The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
+# HIST_STAMPS="mm/dd/yyyy"
 
-# sudo の後ろでコマンド名を補完する
-zstyle ':completion:*:sudo:*' command-path /usr/local/sbin /usr/local/bin \
-	       /usr/sbin /usr/bin /sbin /bin /usr/X11R6/bin
+# Would you like to use another custom folder than $ZSH/custom?
+# ZSH_CUSTOM=/path/to/new-custom-folder
 
-# ps コマンドのプロセス名補完
-	       zstyle ':completion:*:processes' command 'ps x -o pid,s,args'
+# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
+# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
+# Example format: plugins=(rails git textmate ruby lighthouse)
+# Add wisely, as too many plugins slow down shell startup.
+plugins=(git)
 
+# User configuration
 
-########################################
-# vcs_info
-	       autoload -Uz vcs_info
-	       autoload -Uz add-zsh-hook
+export PATH="/Users/kyagi/.rbenv/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
+# export MANPATH="/usr/local/man:$MANPATH"
 
-	       zstyle ':vcs_info:*' formats '%F{green}(%s)-[%b]%f'
-	       zstyle ':vcs_info:*' actionformats '%F{red}(%s)-[%b|%a]%f'
+source $ZSH/oh-my-zsh.sh
 
-	       function _update_vcs_info_msg() {
-		       LANG=en_US.UTF-8 vcs_info
-			       RPROMPT="${vcs_info_msg_0_}"
-	       }
-add-zsh-hook precmd _update_vcs_info_msg
+# You may need to manually set your language environment
+# export LANG=en_US.UTF-8
 
+# Preferred editor for local and remote sessions
+# if [[ -n $SSH_CONNECTION ]]; then
+#   export EDITOR='vim'
+# else
+#   export EDITOR='mvim'
+# fi
 
-########################################
-# オプション
-# 日本語ファイル名を表示可能にする
-setopt print_eight_bit
+# Compilation flags
+# export ARCHFLAGS="-arch x86_64"
 
-# beep を無効にする
-setopt no_beep
+# ssh
+# export SSH_KEY_PATH="~/.ssh/dsa_id"
 
-# フローコントロールを無効にする
-setopt no_flow_control
+# Set personal aliases, overriding those provided by oh-my-zsh libs,
+# plugins, and themes. Aliases can be placed here, though oh-my-zsh
+# users are encouraged to define aliases within the ZSH_CUSTOM folder.
+# For a full list of active aliases, run `alias`.
+#
+# Example aliases
+# alias zshconfig="mate ~/.zshrc"
+# alias ohmyzsh="mate ~/.oh-my-zsh"
 
-# '#' 以降をコメントとして扱う
-setopt interactive_comments
+#percol
 
-# ディレクトリ名だけでcdする
-setopt auto_cd
+function exists { which $1 &> /dev/null }
 
-# cd したら自動的にpushdする
-setopt auto_pushd
-# 重複したディレクトリを追加しない
-setopt pushd_ignore_dups
+if exists percol; then
+    function percol_select_history() {
+        local tac
+        exists gtac && tac="gtac" || { exists tac && tac="tac" || { tac="tail -r" } }
+        #BUFFER=$(history -n 1 | eval $tac | percol --query "$LBUFFER")
+        BUFFER=$(fc -l -n 1 | eval $tac | percol --query "$LBUFFER")
+        CURSOR=$#BUFFER         # move cursor
+        zle -R -c               # refresh
+    }
 
-# 同時に起動したzshの間でヒストリを共有する
-setopt share_history
-
-# 同じコマンドをヒストリに残さない
-setopt hist_ignore_all_dups
-
-# スペースから始まるコマンド行はヒストリに残さない
-setopt hist_ignore_space
-
-# ヒストリに保存するときに余分なスペースを削除する
-setopt hist_reduce_blanks
-
-# 高機能なワイルドカード展開を使用する
-setopt extended_glob
-
-########################################
-# キーバインド
-
-# ^R で履歴検索をするときに * でワイルドカードを使用出来るようにする
-bindkey '^R' history-incremental-pattern-search-backward
-
-########################################
-# エイリアス
-
-alias la='ls -a'
-alias ll='ls -l'
-
-alias rm='rm -i'
-alias cp='cp -i'
-alias mv='mv -i'
-
-alias mkdir='mkdir -p'
-
-# sudo の後のコマンドでエイリアスを有効にする
-alias sudo='sudo '
-
-# グローバルエイリアス
-alias -g L='| less'
-alias -g G='| grep'
-
-# C で標準出力をクリップボードにコピーする
-# mollifier delta blog : http://mollifier.hatenablog.com/entry/20100317/p1
-if which pbcopy >/dev/null 2>&1 ; then
-# Mac
-alias -g C='| pbcopy'
-elif which xsel >/dev/null 2>&1 ; then
-# Linux
-alias -g C='| xsel --input --clipboard'
-elif which putclip >/dev/null 2>&1 ; then
-# Cygwin
-alias -g C='| putclip'
+    zle -N percol_select_history
+    bindkey '^R' percol_select_history
 fi
 
-# rbenvの設定
-if which rbenv >/dev/null ; then eval "$(rbenv init -)" ; fi
-
-########################################
-# OS 別の設定
-case ${OSTYPE} in
-darwin*)
-#Mac用の設定
-export CLICOLOR=1
-alias ls='ls -G -F'
-;;
-linux*)
-#Linux用の設定
-alias ls='ls -F --color=auto'
-;;
-esac
-
-# vim:set ft=zsh:
-
-#zshプロンプトにモード表示####################################
-function zle-line-init zle-keymap-select {
-  case $KEYMAP in
-    vicmd)
-    PROMPT="%{$fg[green]%}[%n/NOR]%{$reset_color%} %~
-%# "
-    ;;
-    main|viins)
-    PROMPT="%{$fg[green]%}[%n/INS]%{$reset_color%} %~
-%# "
-    ;;
-  esac
-  zle reset-prompt
-}
-zle -N zle-line-init
-zle -N zle-keymap-select
+# for homebrew
+[[ -s `brew --prefix`/etc/autojump.sh ]] && . `brew --prefix`/etc/autojump.sh
