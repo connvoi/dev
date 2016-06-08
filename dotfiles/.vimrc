@@ -68,6 +68,21 @@ call neobundle#end()
   NeoBundle 'git://github.com/ujihisa/unite-colorscheme'
   NeoBundle 'git://github.com/thinca/vim-ref'
   let g:ref_phpmanual_path = $HOME . '/.vim/refs/php-chunked-xhtml'
+  "install tagbar
+  NeoBundle 'majutsushi/tagbar'
+  " tagbar の設定
+  "":TagbarShowTag を叩かなくても有効にする
+  "let g:tagbar_width = 30  
+  "let g:tagbar_autoshowtag = 1   
+  NeoBundle 'vim-scripts/tagbar-phpctags', {
+    \   'build' : {
+    \     'others' : 'chmod +x bin/phpctags',
+    \   },
+    \ }
+  "let g:tagbar_phpctags_bin='/User/kyagi/Project/phpctags/bin'
+  let g:tagbar_phpctags_memory_limit = '512M'
+
+
   "quickrun config
   NeoBundle 'git://github.com/thinca/vim-quickrun'
   let g:quickrun_config = {}
@@ -75,7 +90,6 @@ call neobundle#end()
   " vim-scripts repos
   NeoBundle 'git://github.com/vim-scripts/L9'
   NeoBundle 'git://github.com/vim-scripts/FuzzyFinder'
-  NeoBundle 'git://github.com/scrooloose/nerdtree'
   " Non github repos
   NeoBundle 'git://git.wincent.com/command-t.git'
   " gist repos
@@ -109,8 +123,13 @@ call neobundle#end()
   set statusline+=%{SyntasticStatuslineFlag()}
   set statusline+=%*
 
- filetype plugin indent on     " Required!
-
+  filetype plugin indent on     " Required!
+  "install Nerdtree
+  "show Hidenfiles(ex .vimrc
+  NeoBundle 'scrooloose/nerdtree'
+  let NERDtreeShowHidden=1
+  "autostart nerdtree
+  "autocmd VimEnter * execute 'NERDTree'
 
  "lightline
 NeoBundle 'git://github.com/itchyny/lightline.vim'
@@ -165,6 +184,7 @@ endif
 imap jj <ESC>
 nmap j gj
 nmap k gk
+nmap <F8> :TagbarToggle<CR>
 vmap j gj
 vmap k gk
 
