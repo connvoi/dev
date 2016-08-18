@@ -30,6 +30,7 @@ set undolevels=100
 
 "set dictionary
 autocmd BufRead *.php\|*.ctp\|*.tpl :set dictionary=~/.vim/dictionaries/php.dict filetype=php
+au BufRead,BufNewFile *.md set filetype=markdown
 
 "neobundle Settings
 set nocompatible               " Be iMproved
@@ -111,6 +112,8 @@ call neobundle#end()
   "NeoBundle 'Markdown'
   NeoBundle 'git://github.com/plasticboy/vim-markdown'
   let g:vim_markdown_folding_disabled=1
+  NeoBundle 'kannokanno/previm'
+  NeoBundle 'tyru/open-browser.vim'
   NeoBundle 'git://github.com/scrooloose/syntastic'
   let g:syntastic_check_on_open = 1
   let g:syntastic_enable_signs = 1

@@ -54,7 +54,9 @@ plugins=(git)
 
 # User configuration
 
-export PATH="/Users/kyagi/usr/bin:/Users/kyagi/.rbenv/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
+#export PATH="/Users/kyagi/usr/bin:/usr/bin:/Users/kyagi/.rbenv/bin:/usr/local/bin:/bin:/usr/sbin:/sbin"
+export PATH="/Users/kyagi/usr/bin:/usr/local/bin:$PATH"
+if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 # export MANPATH="/usr/local/man:$MANPATH"
 
 source $ZSH/oh-my-zsh.sh
