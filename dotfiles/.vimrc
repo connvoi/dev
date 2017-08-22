@@ -1,5 +1,5 @@
 set nocompatible
-set history=50
+set history=50 
 set ignorecase
 set notitle
 set wrapscan
@@ -8,7 +8,7 @@ set ruler
 set nolist
 set showcmd
 set showmatch
-set laststatus=2
+set laststatus=2 
 set backspace=indent,eol,start
 set shiftwidth=4
 set softtabstop=0
@@ -33,9 +33,10 @@ autocmd BufRead *.php\|*.ctp\|*.tpl :set dictionary=~/.vim/dictionaries/php.dict
 au BufRead,BufNewFile *.md set filetype=markdown
 
 "neobundle Settings
-set nocompatible               " Be iMproved
+set nocompatible               
+" Be iMproved
 if has('vim_starting')
-  set runtimepath+=~/.vim/bundle/neobundle.vim/
+  set runtimepath+=~/.vim/bundle/neobundle.vim/ 
 endif
 call neobundle#begin(expand('~/.vim/bundle/'))
 NeoBundleFetch 'Shougo/neobundle.vim'
@@ -83,6 +84,25 @@ call neobundle#end()
   "let g:tagbar_phpctags_bin='/User/kyagi/Project/phpctags/bin'
   let g:tagbar_phpctags_memory_limit = '512M'
 
+  " phpfmt and settings
+  NeoBundle 'beanworks/vim-phpfmt'
+  " A standard type: PEAR, PHPCS, PSR1, PSR2, Squiz and Zend
+  let g:phpfmt_standard = 'PSR2'
+  let g:phpfmt_autosave = 0
+
+  "varcheckphp and settings
+  NeoBundle 'flyinshadow/php_localvarcheck.vim'
+  let g:php_localvarcheck_enable = 1
+  let g:php_localvarcheck_global = 0
+  
+  "errormaker and setting
+  NeoBundle 'errormarker.vim'
+  if executable('vimparse.php')
+      setlocal makeprg=vimparse.php\ %\ $*
+      setlocal errorformat=%f:%l:%m
+      setlocal shellpipe=2>&1\ >
+      autocmd BufWritePost <buffer> silent make
+  endif
 
   "quickrun config
   NeoBundle 'git://github.com/thinca/vim-quickrun'
@@ -93,6 +113,10 @@ call neobundle#end()
   NeoBundle 'git://github.com/vim-scripts/FuzzyFinder'
   " Non github repos
   NeoBundle 'git://git.wincent.com/command-t.git'
+
+  "jedi by python
+  NeoBundle 'davidhalter/jedi-vim'
+
   " gist repos
   " NeoBundle 'gist:Shougo/656148', { \ 'name': 'everything.vim', \ 'script_type': 'plugin'}
   " Non git repos
@@ -108,6 +132,8 @@ call neobundle#end()
   NeoBundle 'git://github.com/jpo/vim-railscasts-theme'
   NeoBundle 'git://github.com/therubymug/vim-pyte'
   NeoBundle 'git://github.com/connvoi/vim-colors-connvoi'
+  "shwo indent 
+  NeoBundle 'nathanaelkane/vim-indent-guides'
   "syntastic
   "NeoBundle 'Markdown'
   NeoBundle 'git://github.com/plasticboy/vim-markdown'
@@ -115,12 +141,18 @@ call neobundle#end()
   NeoBundle 'kannokanno/previm'
   NeoBundle 'tyru/open-browser.vim'
   NeoBundle 'git://github.com/scrooloose/syntastic'
-  let g:syntastic_check_on_open = 1
+  let g:syntastic_check_on_open = 0
   let g:syntastic_enable_signs = 1
-  let g:syntastic_echo_current_error = 1
-  let g:syntastic_auto_loc_list = 2
+  let g:syntastic_echo_current_error = 0
+  let g:syntastic_auto_loc_list = 0
+  let g:syntastic_always_populate_loc_list = 0
   let g:syntastic_enable_highlighting = 1
-  " php cmd option
+  let g:syntastic_mode_map = {
+            \ 'mode': 'active',
+            \ 'active_filetypes': ['php', 'coffeescript',  'vim'],
+            \ 'passive_filetypes': ['html', 'haskell', 'python', 'sh']
+            \}
+  "" php cmd option
   let g:syntastic_php_php_args = '-l'
   set statusline+=%#warningmsg#
   set statusline+=%{SyntasticStatuslineFlag()}
